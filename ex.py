@@ -20,8 +20,20 @@ def genSprite(image, pos, status=None):
 화면 = pg.display.set_mode([화면가로길이, 화면세로길이])
 ## 화면 크기 정하기
 pg.display.set_caption('광석채굴!')
-배경이미지 = pg.image.load('img/r1.jpg')
-배경이미지 = pg.transform.scale(배경이미지, (화면가로길이, 화면세로길이))
+
+배경이미지 = []
+배경이미지1 = pg.image.load('img/r1.jpg')
+배경이미지1 = pg.transform.scale(배경이미지1, (화면가로길이, 화면세로길이))
+배경이미지.append(배경이미지1)
+
+배경이미지2 = pg.image.load('img/r1.jpg')
+배경이미지2 = pg.transform.scale(배경이미지2, (화면가로길이, 화면세로길이))
+배경이미지.append(배경이미지2)
+
+배경이미지3 = pg.image.load('img/r1.jpg')
+배경이미지3 = pg.transform.scale(배경이미지3, (화면가로길이, 화면세로길이))
+배경이미지.append(배경이미지3)
+
 ## 이미지를 정해진 사이즈로 변경
 
 소울곰위치 = [화면가로길이 // 2, 화면세로길이 // 2]
@@ -65,8 +77,17 @@ for 인덱스 in range(6):
 광석자동생성남은시간 = 2
 광석자동생성시간 = 9
 
+state = 1
 while 실행여부:
     화면.blit(배경이미지, (0, 0))
+   print(소울곰스프라이트.rect.y)
+   if state == 1:
+        화면.blit(배경이미지[0],(0,0))
+   elif state == 2:
+       화면.blit(배경이미지[1], (0, 0))
+   elif state == 3:
+       화면.blit(배경이미지[2], (0, 0))
+
     흐른시간 = 시계.tick(60) / 1000
     전체시간 += 흐른시간
     화면.blit(소울곰스프라이트.image, 소울곰스프라이트.rect)
@@ -114,6 +135,15 @@ while 실행여부:
                 소울곰이미지상태 = '이동'
             if keys[pg.K_UP]:
                 소울곰위치[1] -= 1
+            if 소울곰스프라이트.rect.y <=90 and state ==1:
+                state = 2
+                소울곰위치[1] = 500
+            elif 소울곰스프라이트.rect.y <=90 and state ==2:
+                state  = 3
+                소울곰위치[1]
+            elif 소울곰스프라이트.rect.y <=90 and state ==3:
+                state  = 4
+                소울곰위치[1]
             elif keys[pg.K_DOWN]:
                 소울곰위치[1] += 1
             else:
